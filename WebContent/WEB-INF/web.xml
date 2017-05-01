@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>RoomieWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>roomieweb</servlet-name>
+    <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>roomieweb</servlet-name>
+    <url-pattern>/doLogin</url-pattern>
+     <url-pattern>/login.jsp</url-pattern>
+    <url-pattern>/login.html</url-pattern>
+    <url-pattern>/index.jsp</url-pattern>
+    <url-pattern>/form-elements.jsp</url-pattern>
+    <url-pattern>/registerMeeting</url-pattern>
+    <url-pattern>/doregisterMeeting</url-pattern>
+    <url-pattern>/registerMeeting.jsp</url-pattern>
+    
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>3</session-timeout>
+  </session-config>
+</web-app>
