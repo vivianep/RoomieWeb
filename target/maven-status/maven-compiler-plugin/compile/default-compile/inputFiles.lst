@@ -1,10 +1,13 @@
 /home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/controller/MeetingsController.java
-/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/MeetingDao.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/UserDAO.java
 /home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/controller/LoginController.java
-/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/UserDao.java
-/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/RoomDao.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/util/Util.java
 /home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/model/User.java
-/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/model/Room.java
 /home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/util/KaaClientClass.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/RoomDAO.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/MeetingDAO.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/model/Room.java
 /home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/model/Meeting.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/test/UserDAOTest.java
 /home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/dao/ConnectionFactory.java
+/home/vivis/workspace2/RoomieWebGUI/src/com/roomieweb/controller/AuthorizerInterceptor.java

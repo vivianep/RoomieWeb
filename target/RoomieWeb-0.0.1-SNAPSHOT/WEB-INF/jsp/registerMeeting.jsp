@@ -55,12 +55,14 @@
     </head>
     
     <body>
-            <jsp:include page="sidebar.jsp" />
-            <section id="content">
+             <jsp:include page="header.jsp" />
+           
+           <section id="main">
+             <jsp:include page="sidebar.jsp" />
+           
+              <section id="content">
                 <div class="container">
-                    <div class="block-header">
-                        <h2>Form Elements</h2>
-
+                     <div class="block-header">
                         <ul class="actions">
                             <li>
                                 <a class="icon-pop" href="">
@@ -98,7 +100,8 @@
 
                     <div class="card">
                         <div class="card-header">
-                           
+                           <h1>Create a new Meeting</h1>
+                    <br><br>
                              <div class="form-group">
                                 <form action="doregisterMeeting" method="post">
                                 <div class="fg-line">
@@ -170,13 +173,14 @@
                                             <div class="input-group form-group">
                                                 <span class="input-group-addon"><i class="zmdi zmdi-time"></i></span>
                                                 <div class="dtp-container">
-                                                    <input type='text' class="form-control time-picker" name="endTime" 
+                                                    <input type='text' class="form-control time-picker" id="datetimepicker5" name="endTime" 
                                                            placeholder="Click here...">
                                                 </div>
                                             </div>
                                         </div> 
                                         </div>       
-                                    <button type="submit" class="btn bgm-deeppurple waves-effect">Submit</button>
+                                        <br><br><br>
+                                    <button style="margin-top:4%;" type="submit" class="btn bgm-deeppurple  btn-block waves-effect">Submit</button>
 								</form>
                                     </div>
                                 </div>
@@ -184,6 +188,7 @@
                         
                     </div>
             </section>
+           </section>
         
         
         <footer id="footer">
@@ -314,8 +319,15 @@
         <script src="${dropzone_js}"></script>
         
         <script src="${app}"></script>
-        
-
+        <script>
+        $(function () {
+		    $('#datetimepicker5').datetimepicker({
+		        use24hours: true,
+		        format: 'HH:mm'
+		   	 });
+		});	
+		</script>
+       
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
             <script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>

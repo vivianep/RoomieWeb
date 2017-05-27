@@ -1,5 +1,8 @@
 package com.roomieweb.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Room {
 
 	private int roomId;

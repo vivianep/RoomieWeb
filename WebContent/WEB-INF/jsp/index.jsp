@@ -29,9 +29,10 @@
 	
     </head>
     <body>
-       <jsp:include page="sidebar.jsp" />
-        <section id="main">
-            
+       <jsp:include page="header.jsp" />
+           
+           <section id="main">
+             <jsp:include page="sidebar.jsp" />
             
             <section id="content">
                 <div class="container">

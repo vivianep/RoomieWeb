@@ -36,6 +36,17 @@
 			<artifactId>spring-context</artifactId>
 			<version>4.3.7.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-pool2</artifactId>
+		    <version>2.4.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -46,7 +57,7 @@
 			<artifactId>client-java-desktop</artifactId>
 			<version>1</version>
 			<scope>system</scope>
-			<systemPath>/home/vivis/Desktop/lib/kaa-java-ep-sdk-GcOr968omITSWjCUuF2iNyMLaHc.jar</systemPath>
+			<systemPath>/home/vivis/Desktop/lib/kaa-java-ep-sdk-ggHDjeB0si6aNj8x3SAO7YlsPdM.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -58,6 +69,13 @@
 			<artifactId>spring-web</artifactId>
 			<version>4.3.7.RELEASE</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>4.3.8.RELEASE</version>
+		</dependency>
+		
+			
 			<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
@@ -73,10 +91,17 @@
 		    <artifactId>logback-classic</artifactId>
 		    <version>1.1.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>2.2</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
 		</dependency>
 		<dependency>
 		   <groupId>mysql</groupId>
@@ -87,6 +112,54 @@
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>log4j-over-slf4j</artifactId>
 		    <version>1.7.25</version>
+		</dependency>
+		<dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.11</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-core</artifactId>
+		    <version>1.9.5</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>3.2.3.RELEASE</version>
+		    <scope>test</scope>
+		</dependency>
+		 <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.common</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>4.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.0.1.Final</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>3.1.1.RELEASE</version>
 		</dependency>
 		
   </dependencies>

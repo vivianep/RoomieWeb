@@ -2,6 +2,9 @@ package com.roomieweb.model;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Meeting {
 
 	
@@ -13,6 +16,10 @@ public class Meeting {
 	private String endTime;
 	private String interruptReason;
 	private String meetingName;
+	
+	public Meeting(){
+		
+	}
 	
 	public int getMeetingId() {
 		return meetingId;

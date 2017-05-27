@@ -11,6 +11,7 @@
 		<spring:url value="/resources/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" var="vendows_bower_material" />
 		<spring:url value="/resources/css/app_1.min.css" var="app_1"/>
 		<spring:url value="/resources/css/app_2.min.css" var="app_2"/>
+		<spring:url value="/resources/img/logo-roomie.png" var="logo_roomie"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<link href="${vendows_bower_animate}" rel="stylesheet" />
 		<link href="${vendows_bower_material}" rel="stylesheet" />
@@ -21,6 +22,7 @@
     <body>
         <div class="login-content">
             <!-- Login -->
+            <img style ="width:20%;margin-top:10%;"src="${logo_roomie}"/>
             <form action="doLogin" method="post">
             <div class="lc-block toggled" id="l-login">
                 <div class="lcb-form">
@@ -40,7 +42,8 @@
 
                    
                 
-                    <input type="submit" class="btn btn-login btn-success btn-float" <i class="zmdi zmdi-arrow-forward"></i>>
+                    <button class="btn bgm-lime btn-icon waves-effect waves-circle waves-float" type="submit">  <i class="zmdi zmdi-arrow-forward"></i>
+               		</button>
                </div>
 
                 <div class="lcb-navigation">

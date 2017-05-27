@@ -21,8 +21,8 @@ import org.kaaproject.kaa.client.event.registration.UserAttachCallback;
 import org.kaaproject.kaa.client.exceptions.KaaException;
 import org.kaaproject.kaa.common.endpoint.gen.UserAttachResponse;
 import com.mysql.jdbc.PreparedStatement;
-import com.roomie.UpdateMeetingECF.UpdateMeetingECF;
-import com.roomie.UpdateMeetingEvent.UpdateMeetingEvent;
+import com.roomie.UpdateMeetingsECF;
+import com.roomie.UpdateMeetingsEvent;
 import com.roomieweb.dao.ConnectionFactory;
 	
 public class KaaClientClass{
@@ -65,11 +65,11 @@ public class KaaClientClass{
 			
 			System.out.println("Before attaching");
 			EventFamilyFactory eventFamilyFactory = kaaClient.getEventFamilyFactory();
-			UpdateMeetingECF updateMeetingECF = eventFamilyFactory.getUpdateMeetingECF();
+			UpdateMeetingsECF updateMeetingECF = eventFamilyFactory.getUpdateMeetingsECF();
 		
 				
 			final CountDownLatch attachLatch = new CountDownLatch(1);
-				kaaClient.attachUser("Trustful Verifier", "44533909101578045284", new UserAttachCallback()
+				kaaClient.attachUser("trustful", "24915229817159384361", new UserAttachCallback()
 			{
 			    @Override
 			    public void onAttachResult(UserAttachResponse response) {
@@ -81,7 +81,7 @@ public class KaaClientClass{
 			
 			
 			List<String> FQNs = new LinkedList<String>();
-			FQNs.add(UpdateMeetingEvent.class.getName());
+			FQNs.add(UpdateMeetingsEvent.class.getName());
 			
 			final CountDownLatch eventListenersLatch = new CountDownLatch(1);
 			
@@ -114,9 +114,9 @@ public class KaaClientClass{
 			
 			
 			List<String> MeetingName = new LinkedList<String>();
-			UpdateMeetingEvent e = new UpdateMeetingEvent();
-			e.setRoomId(roomId);
-			e.setSource(1);
+			UpdateMeetingsEvent e = new UpdateMeetingsEvent();
+			e.setWhoRequested(1);
+		
 			updateMeetingECF.sendEventToAll(e);
 			updateMeetingECF.sendEventToAll(e);
 			
@@ -124,9 +124,6 @@ public class KaaClientClass{
 			
 			//UpdateMeetingEvent.add(MeetingEvent.class.getName());
 			
-			final CountDownLatch updateMeetingReceiversLatch = new CountDownLatch(1);
-			System.out.println("Before find listeners");
-		
-		
+			
 	}
 }

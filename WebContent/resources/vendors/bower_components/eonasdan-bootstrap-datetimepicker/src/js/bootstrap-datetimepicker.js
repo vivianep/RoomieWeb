@@ -64,7 +64,7 @@
             input,
             component = false,
             widget = false,
-            use24Hours,
+            use24Hours = true,
             minViewModeNumber = 0,
             actualFormat,
             parseFormats,
