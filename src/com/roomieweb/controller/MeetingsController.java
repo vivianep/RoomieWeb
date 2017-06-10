@@ -91,12 +91,12 @@ public class MeetingsController {
 	@RequestMapping(value="doremoveMeeting",method=RequestMethod.POST)
 	public String doremoveMeeting(Model model,Meeting m) throws ClassNotFoundException, SQLException, IOException, InterruptedException {
 		
-			int meetingId = m.getMeetingId();
 			
-			KaaClientClass kaaClient = new KaaClientClass(meetingId);
-			
+			Meeting meeting = meetingDao.getMeetingbyId(m.getMeetingId());
 			meetingDao.removeMeeting(m);
-			
+			if(Util.isOnCurrentHour(meeting)) {
+				KaaClientClass kaaClient = new KaaClientClass(meeting.getMeetingId());
+			}
 			
 			return "redirect:showMeetings";		
 		
@@ -172,13 +172,14 @@ public class MeetingsController {
 		
 	}
 
-	@RequestMapping("doUpdateMeetings")
-	public String doUpdateMeetings(HttpServletRequest request,String meetingName,Integer roomId, Integer[] usersId,String startDate,String startTime,String endDate,String endTime ) throws ClassNotFoundException, IOException, InterruptedException {
+	@RequestMapping("doUpdateMeeting")
+	public String doUpdateMeeting(HttpServletRequest request,String meetingName,Integer roomId, Integer[] usersId,String startDate,String startTime,String endDate,String endTime, int meetingId ) throws ClassNotFoundException, IOException, InterruptedException {
 		
 		User loggedUser = (User) request.getSession().getAttribute("LoggedUser");
 		if(loggedUser!=null) {
 			Meeting m = new Meeting();
 			m.setMeetingName(meetingName);
+			m.setMeetingId(meetingId);
 			ArrayList<User> users = new ArrayList<User>();
 			Room r = new Room();
 			r.setRoomId(roomId);
@@ -198,7 +199,9 @@ public class MeetingsController {
 			m.setEndTime(endDateTime);
 			
 			meetingDao.updateMeeting(m);
-			KaaClientClass kaaClient = new KaaClientClass(m.getMeetingId());
+			if(Util.isOnCurrentHour(m)) {
+				KaaClientClass kaaClient = new KaaClientClass(m.getMeetingId());
+			}
 			return "redirect:showMeetings";
 			
 		}else {
@@ -233,7 +236,10 @@ public class MeetingsController {
 			m.setStartTime(startDateTime);
 			m.setEndTime(endDateTime);
 			
-			meetingDao.addMeeting(m);
+			int id=meetingDao.addMeeting(m);
+			if(Util.isOnCurrentHour(m)) {
+				KaaClientClass kaaClient = new KaaClientClass(id);
+			}
 			
 			return "redirect:showMeetings";
 		}else {

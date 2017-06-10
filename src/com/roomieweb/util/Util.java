@@ -77,15 +77,15 @@ public static String codifySHA256(String text) throws NoSuchAlgorithmException{
 			
 		}
 		
-		public static boolean isOnCurrentHour(String startDateStr,String endDateStr) {
+		public static boolean isOnCurrentHour(Meeting m) {
 			
 			Calendar calendar = Calendar.getInstance();
 			Date currentTime = calendar.getTime();
 			Date endHour = getHour(59,59);
 			Date initialHour = getHour(0,0);
 			//calendar.set(, month, date);
-			Date startDate = convertStringToDate(startDateStr);
-			Date endDate = convertStringToDate(endDateStr);
+			Date startDate = convertStringToDate(m.getStartTime());
+			Date endDate = convertStringToDate(m.getEndTime());
 			 if(initialHour.before(startDate) && startDate.before(endHour) ) {
 		    	if(endDate.after(currentTime))
 		    		return true;

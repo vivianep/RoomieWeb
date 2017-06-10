@@ -55,7 +55,7 @@ public class MeetingDAO {
 		
 	}
 	
-	public void addMeeting(Meeting m) throws ClassNotFoundException{
+	public int addMeeting(Meeting m) throws ClassNotFoundException{
 			
 			try {
 				String sql = "INSERT INTO roomie.meeting(meeting_name,room_id,"
@@ -83,11 +83,12 @@ public class MeetingDAO {
 					
 					preparedStat.executeUpdate();
 				}
-			
+				return lastId;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return 0;
 			
 			
 		}
@@ -96,7 +97,7 @@ public class MeetingDAO {
 		
 		try {
 			
-			String sql = "UPDATE roomie.meeting m SET m.room_id=?,m.start_time=?,m.end_time=? "
+			String sql = "UPDATE roomie.meeting m SET m.room_id=?,m.start_time=?,m.end_time=?, "
 					+ "m.meeting_name=? "
 					+ " WHERE m.meeting_id=?";					
 			
@@ -113,6 +114,7 @@ public class MeetingDAO {
 			String sqlRemove = "DELETE FROM roomie.meeting_guest  where roomie.meeting_guest.meeting_id=?"; 
 			preparedStat= (PreparedStatement) connection.prepareStatement(sql);
 			preparedStat.setInt(1, m.getMeetingId());
+			preparedStat.executeUpdate();
 					
 			
 			int lastId = m.getMeetingId();

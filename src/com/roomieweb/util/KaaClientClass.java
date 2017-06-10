@@ -34,30 +34,28 @@ public class KaaClientClass{
 	public  KaaClientClass(Integer meetingId) throws IOException, InterruptedException{
 					
 					
-				//Connection connection = ConnectionFactory.getConnection();
+			//Connection connection = ConnectionFactory.getConnection();	
+			CountDownLatch startUpLatch = new CountDownLatch(1);	
+			KaaClientProperties endpointProperties = new KaaClientProperties();
+		    endpointProperties.setWorkingDirectory(KEYS_DIR);
+		    // Create the Kaa desktop context for the application
+		   System.out.println("possible problem");
+		    DesktopKaaPlatformContext desktopKaaPlatformContext = new DesktopKaaPlatformContext(endpointProperties);
+		   // new Desktop
+			kaaClient = Kaa.newClient(desktopKaaPlatformContext, new SimpleKaaClientStateListener() {
+			@Override
+				public void onStarted() {
+					System.out.println("Kaa client started on RoomieWebGUI");
+					startUpLatch.countDown();
+				}
 		
-					
-				CountDownLatch startUpLatch = new CountDownLatch(1);	
-				KaaClientProperties endpointProperties = new KaaClientProperties();
-			    endpointProperties.setWorkingDirectory(KEYS_DIR);
-			    // Create the Kaa desktop context for the application
-			   System.out.println("possible problem");
-			    DesktopKaaPlatformContext desktopKaaPlatformContext = new DesktopKaaPlatformContext(endpointProperties);
-			   // new Desktop
-				kaaClient = Kaa.newClient(desktopKaaPlatformContext, new SimpleKaaClientStateListener() {
 				@Override
-					public void onStarted() {
-						System.out.println("Kaa client started on RoomieWebGUI");
-						startUpLatch.countDown();
-					}
-			
-					@Override
-					public void onStopped() {
-						System.out.println("Kaa client stopped");
-					}
+				public void onStopped() {
+					System.out.println("Kaa client stopped");
+				}
 
 
-				},true);
+			},true);
 				
 			kaaClient.start();
 			startUpLatch.await();
@@ -115,9 +113,8 @@ public class KaaClientClass{
 		UpdateMeetingsEvent e = new UpdateMeetingsEvent();
 		e.setWhoRequested(meetingId);
 		
-	
 		updateMeetingECF.sendEventToAll(e);
-		updateMeetingECF.sendEventToAll(e);
+		//updateMeetingECF.sendEventToAll(e);
 		
 		System.out.println("Event sent from RoomieWebGUI to RoomieRaspberry");
 		

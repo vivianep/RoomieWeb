@@ -103,9 +103,11 @@
                            <h1>Update your meeting</h1>
                     <br><br>
                              <div class="form-group">
-                                <form action="doUpdateMeetings" method="post">
+                                <form action="doUpdateMeeting" method="post">
                                 <div class="fg-line">
                                     <input type="text" class="form-control input-lg" placeholder="Meeting Name" value="${meeting.meetingName}"  name ="meetingName">
+                                	<input type="hidden"  value="${meeting.meetingId}"  name ="meetingId">
+                              
                                 </div>
                                 <div style="margin-top: 2%;">
 
