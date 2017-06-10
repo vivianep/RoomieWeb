@@ -67,6 +67,7 @@ public class MeetingDAO {
 				preparedStat.setInt(2,m.getRoom().getRoomId());
 				preparedStat.setString(3,m.getStartTime());
 				preparedStat.setString(4,m.getEndTime());
+				System.out.println(preparedStat);
 				preparedStat.executeUpdate();
 				
 				
@@ -90,6 +91,51 @@ public class MeetingDAO {
 			
 			
 		}
+	
+	public void updateMeeting(Meeting m) throws ClassNotFoundException{
+		
+		try {
+			
+			String sql = "UPDATE roomie.meeting m SET m.room_id=?,m.start_time=?,m.end_time=? "
+					+ "m.meeting_name=? "
+					+ " WHERE m.meeting_id=?";					
+			
+			PreparedStatement preparedStat= (PreparedStatement) connection.prepareStatement(sql);
+			preparedStat.setInt(1,m.getRoom().getRoomId());
+			preparedStat.setString(2,m.getStartTime());
+			preparedStat.setString(3,m.getEndTime());
+			preparedStat.setString(4,m.getMeetingName());
+			preparedStat.setInt(5, m.getMeetingId());
+			
+			System.out.println(preparedStat);
+			preparedStat.executeUpdate();
+			
+			String sqlRemove = "DELETE FROM roomie.meeting_guest  where roomie.meeting_guest.meeting_id=?"; 
+			preparedStat= (PreparedStatement) connection.prepareStatement(sql);
+			preparedStat.setInt(1, m.getMeetingId());
+					
+			
+			int lastId = m.getMeetingId();
+			for( int i =0; i<m.getUsers().size();i++){
+				
+				sql = "INSERT INTO roomie.meeting_guest(user_id,meeting_id, isOwner) "
+						+ "VALUES (?,?,?)";
+				preparedStat= (PreparedStatement) connection.prepareStatement(sql);
+				preparedStat.setInt(1, m.getUsers().get(i).getUserId());
+				preparedStat.setInt(2,lastId);
+				preparedStat.setBoolean(3, m.getUsers().get(i).isOwner());
+				
+				preparedStat.executeUpdate();
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 
 		public ArrayList<Meeting> getMeetings(String email) throws ClassNotFoundException, SQLException{
 			
@@ -131,8 +177,55 @@ public class MeetingDAO {
 
 			
 		}
+		public Meeting getMeetingbyId(int meetingId) throws ClassNotFoundException, SQLException{
+			
+			 PreparedStatement preparedStatement;
+			 Meeting m = new Meeting();
+			 User u = new User();
+			 ArrayList<Meeting> meetings = new ArrayList<Meeting>();
+			 ArrayList<User> users = new ArrayList<User>();
+			  
+			 String sql = "SELECT m.meeting_id, m.meeting_name, m.start_time, m.end_time, u.user_id, u.name, "+ 
+				 "u.email, u.rfid_code, mg.isOwner,r.room, r.location, r.room_id FROM roomie.meeting m  "+
+				 "JOIN roomie.meeting_guest mg ON mg.meeting_id= m.meeting_id  "+
+				 "JOIN roomie.user u ON u.user_id = mg.user_id  "+
+				 "JOIN roomie.room r ON r.room_id = m.room_id  "+
+				 "WHERE m.meeting_id =? ";
+
+			 preparedStatement = (PreparedStatement) connection.prepareStatement(sql);				
+			 preparedStatement.setInt(1, meetingId);
+			 ResultSet rs = preparedStatement.executeQuery();
+			 boolean isFirst = true;
+			 while(rs.next()){
+				 	 if(isFirst){
+				 		 Room r = new Room();
+				 		 m.setEndTime(rs.getString("m.end_time"));
+						 m.setStartTime(rs.getString("m.start_time"));
+						 m.setMeetingName(rs.getString("m.meeting_name"));
+						 m.setMeetingId(rs.getInt("m.meeting_id"));
+						 r.setRoomLocation(rs.getString("r.location"));
+						 r.setRoomName(rs.getString("r.room"));
+						 r.setRoomId(rs.getInt("r.room_id"));
+				 		 users = new ArrayList<User>();
+				 		 isFirst = false;
+					 }
+				  
+					 u = new User();
+					 u.setUserId(rs.getInt("u.user_id"));
+					 u.setEmail(rs.getString("u.email"));
+					 u.setRfidCode(rs.getString("u.rfid_code"));
+					 u.setOwner(rs.getBoolean("mg.isOwner"));
+					 users.add(u);
+				 
+			 }
+			 m.setUsers(users);
+			 return m;
+			 
+		}
 
 
+
+		
 /*
 		public ArrayList<Meeting> getMeetings(String email) throws ClassNotFoundException, SQLException{
 			

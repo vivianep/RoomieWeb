@@ -23,7 +23,6 @@ import org.kaaproject.kaa.common.endpoint.gen.UserAttachResponse;
 import com.mysql.jdbc.PreparedStatement;
 import com.roomie.UpdateMeetingsECF;
 import com.roomie.UpdateMeetingsEvent;
-import com.roomieweb.dao.ConnectionFactory;
 	
 public class KaaClientClass{
 	
@@ -32,7 +31,7 @@ public class KaaClientClass{
 	
 	
 
-	public  KaaClientClass(Integer roomId) throws IOException, InterruptedException{
+	public  KaaClientClass(Integer meetingId) throws IOException, InterruptedException{
 					
 					
 				//Connection connection = ConnectionFactory.getConnection();
@@ -48,7 +47,7 @@ public class KaaClientClass{
 				kaaClient = Kaa.newClient(desktopKaaPlatformContext, new SimpleKaaClientStateListener() {
 				@Override
 					public void onStarted() {
-						System.out.println("Kaa client started");
+						System.out.println("Kaa client started on RoomieWebGUI");
 						startUpLatch.countDown();
 					}
 			
@@ -73,57 +72,60 @@ public class KaaClientClass{
 			{
 			    @Override
 			    public void onAttachResult(UserAttachResponse response) {
-			        System.out.println("Attach response" + response.getResult());
+			        System.out.println("User attached on RoomieWebGUI with response " + response.getResult());
 			        attachLatch.countDown();
 			    }
 			});
 			attachLatch.await();
 			
-			
-			List<String> FQNs = new LinkedList<String>();
-			FQNs.add(UpdateMeetingsEvent.class.getName());
-			
-			final CountDownLatch eventListenersLatch = new CountDownLatch(1);
-			
-			kaaClient.findEventListeners(FQNs, new FindEventListenersCallback(){
-			
-				@Override
-				public void onEventListenersReceived(List<String> eventListeners) {
-					System.out.println("Event listeners received "+ eventListeners.size());
-					for( int i =0 ; i<eventListeners.size(); i++)
-						System.out.println(eventListeners.get(i));
-					eventListenersLatch.countDown();
-				}
-		
-				@Override
-				public void onRequestFailed() {
-					System.out.println("Failed ");
-					
-					
-				}
+			sendUpdateMeetingEvent(updateMeetingECF,meetingId);
 				
-			
-				
-			});
-			
-			eventListenersLatch.await();
-			
-			
-			
-			
-			
-			
-			List<String> MeetingName = new LinkedList<String>();
-			UpdateMeetingsEvent e = new UpdateMeetingsEvent();
-			e.setWhoRequested(1);
-		
-			updateMeetingECF.sendEventToAll(e);
-			updateMeetingECF.sendEventToAll(e);
-			
-			System.out.println("Event sent");
-			
-			//UpdateMeetingEvent.add(MeetingEvent.class.getName());
-			
-			
 	}
+	
+	public void sendUpdateMeetingEvent(UpdateMeetingsECF updateMeetingECF, int meetingId) throws InterruptedException {
+		
+		List<String> FQNs = new LinkedList<String>();
+		FQNs.add(UpdateMeetingsEvent.class.getName());
+		
+		final CountDownLatch eventListenersLatch = new CountDownLatch(1);
+		
+		kaaClient.findEventListeners(FQNs, new FindEventListenersCallback(){
+		
+			@Override
+			public void onEventListenersReceived(List<String> eventListeners) {
+				System.out.println("Event listeners received "+ eventListeners.size());
+				for( int i =0 ; i<eventListeners.size(); i++)
+					System.out.println(eventListeners.get(i));
+				eventListenersLatch.countDown();
+			}
+	
+			@Override
+			public void onRequestFailed() {
+				System.out.println("Failed ");
+				
+				
+			}
+			
+		
+			
+		});
+		
+		eventListenersLatch.await();		
+		List<String> MeetingName = new LinkedList<String>();
+		UpdateMeetingsEvent e = new UpdateMeetingsEvent();
+		e.setWhoRequested(meetingId);
+		
+	
+		updateMeetingECF.sendEventToAll(e);
+		updateMeetingECF.sendEventToAll(e);
+		
+		System.out.println("Event sent from RoomieWebGUI to RoomieRaspberry");
+		
+		//UpdateMeetingEvent.add(MeetingEvent.class.getName());
+		
+
+		
+	}
+	
+	
 }

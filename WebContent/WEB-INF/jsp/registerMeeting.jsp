@@ -138,7 +138,7 @@
                                             <span class="input-group-addon"><i class="zmdi zmdi-calendar"></i></span>
                                             <div class="dtp-container">
                                                 <input type='text' name="startDate" class="form-control date-picker"
-                                                       placeholder="Click here...">
+                                                       placeholder="Click here..." id=datetimepicker5>
                                             </div>
                                         </div>
                                     </div>

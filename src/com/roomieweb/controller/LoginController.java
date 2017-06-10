@@ -62,7 +62,6 @@ public class LoginController {
 		  u = userDao.getUser(username);
 		   session.setAttribute("LoggedUser", u);
 		   //return "/showMeetings";
-	
 			return "redirect:/showMeetings";
 		 
 	  }

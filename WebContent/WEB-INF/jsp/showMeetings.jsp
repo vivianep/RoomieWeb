@@ -95,7 +95,9 @@
                                     <th data-column-id="endTime">End Time</th>
                                     <th data-column-id="room">Room</th>
 				                    <th data-column-id="roomLocation">Room Location</th>               
-                                    <th data-column-id="commands" data-formatter="commands" data-sortable="false">Actions</th>
+                                    <th data-column-id="commands" data-formatter="commands" data-sortable="false">Edit</th>
+                               		<th data-column-id="commands" data-formatter="commands" data-sortable="false">Remove</th>
+                               
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,6 +109,20 @@
 	                                    <td>${m.endTime}</td>
 	                                    <td>${m.room.roomName}</td>
 	                                    <td>${m.room.roomLocation}</td>
+	                                  	<td>
+	                                  	<form action="editMeeting" method="post">  
+	                                  		<input type="hidden" name="meetingId" value="${m.meetingId}" >
+	                                  		<button type="submit" class="btn btn-icon command-edit waves-effect waves-circle" >
+	                                  		<span class="zmdi zmdi-edit"></span></button> 
+	                                  		</form>
+	                                  	</td>
+	                                  	<td>
+	                                  	<form action="doremoveMeeting" method="post">  
+	                                  		<input type="hidden" name="meetingId" value="${m.meetingId}" >
+	                                  		<button type="submit" class="btn btn-icon command-delete waves-effect waves-circle" >
+	                                  		<span class="zmdi zmdi-edit"></span></button> 
+	                                  		</form>
+	                                  	</td>    
 	                                    
                            			</tr>
                     			</c:forEach>
@@ -298,22 +314,7 @@
                 });
 
                 //Command Buttons
-                $("#data-table-command").bootgrid({
-                    css: {
-                        icon: 'zmdi icon',
-                        iconColumns: 'zmdi-view-module',
-                        iconDown: 'zmdi-sort-amount-desc',
-                        iconRefresh: 'zmdi-refresh',
-                        iconUp: 'zmdi-sort-amount-asc'
-                    },
-                    formatters: {
-                        "commands": function(column, row) {
-                            return "<button type=\"button\" class=\"btn btn-icon command-edit waves-effect waves-circle\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-edit\"></span></button> " +
-                                    "<button type=\"button\" class=\"btn btn-icon command-delete waves-effect waves-circle\" data-row-id=\"" + row.id + "\"><span class=\"zmdi zmdi-delete\"></span></button>";
-                        }
-                    }
-                });
-            });
+               
         </script>
             
         
