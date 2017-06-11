@@ -114,7 +114,7 @@ public class KaaClientClass{
 		e.setWhoRequested(meetingId);
 		
 		updateMeetingECF.sendEventToAll(e);
-		//updateMeetingECF.sendEventToAll(e);
+		updateMeetingECF.sendEventToAll(e);
 		
 		System.out.println("Event sent from RoomieWebGUI to RoomieRaspberry");
 		
